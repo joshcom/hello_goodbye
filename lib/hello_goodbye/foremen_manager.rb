@@ -2,6 +2,25 @@ module HelloGoodbye
   class ForemenManager
     require File.expand_path('lib/hello_goodbye/console')
 
+    attr_accessor :server, :port
+
+    DEFAULT_SERVER = "127.0.0.1"
+    DEFAULT_MANAGER_PORT = 8080
+
+    def initialize(options={})
+      options.map do |key,value|
+        self.send("#{key}=",value) if self.respond_to?("#{key}=".to_sym)
+      end
+    end
+
+    def server 
+      @server || DEFAULT_SERVER
+    end
+
+    def port
+      @port || DEFAULT_MANAGER_PORT
+    end
+
     def foremen
       @foremen ||= []
     end
@@ -17,6 +36,8 @@ module HelloGoodbye
       self.foremen << foreman
     end
 
+    # Starts the manager console and all the
+    # registered foremen.
     def start!
       start_with_reactor do
         self.start_console
@@ -35,9 +56,7 @@ module HelloGoodbye
     end
 
     def start_console
-      # TODO: Again, don't hardcode address, and certainly not the
-      # port
-      EM::start_server("127.0.0.1", 8080, Console.get(:manager))
+      EM::start_server(self.server, self.port, Console.get(:manager))
     end
 
     def start_foremen
@@ -51,10 +70,8 @@ module HelloGoodbye
       # TODO: We will want run to be executed here, but ONLY if
       # we're not already in an event loop.
       EM::run do
-        # TODO: I guess I don't know why the hell we'd ever run this on anything but
-        # 127.0.0.1, but either way, let's make it optional
         self.foremen.each do |foreman|
-          EM::start_server("127.0.0.1", foreman[:port], forman[:class])
+          EM::start_server(self.server, foreman[:port], forman[:class])
         end
       end
     end

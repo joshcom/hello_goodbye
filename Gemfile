@@ -1,10 +1,7 @@
 source "http://rubygems.org"
 
 gem "eventmachine"
-
-group :test do
-  gem "rspec"
-end
+gem "rspec"
 
 group :development do
   gem "shoulda", ">= 0"
