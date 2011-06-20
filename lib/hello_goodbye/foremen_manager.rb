@@ -1,20 +1,14 @@
 module HelloGoodbye
-  class ForemenManager
-    require File.expand_path('lib/hello_goodbye/console')
+  require File.expand_path('lib/hello_goodbye/console')
+  require File.expand_path('lib/hello_goodbye/foreman')
+  class ForemenManager < Foreman
 
-    attr_accessor :server, :port
-
-    DEFAULT_SERVER = "127.0.0.1"
     DEFAULT_MANAGER_PORT = 8080
 
     def initialize(options={})
       options.map do |key,value|
         self.send("#{key}=",value) if self.respond_to?("#{key}=".to_sym)
       end
-    end
-
-    def server 
-      @server || DEFAULT_SERVER
     end
 
     def port
@@ -33,30 +27,15 @@ module HelloGoodbye
     #               that will handle the connection and spawn
     #               workers.
     def register_foreman(foreman_hash)
-      self.foremen << foreman
+      self.foremen << foreman.merge(:running => false, :reference => nil)
     end
 
     # Starts the manager console and all the
     # registered foremen.
-    def start!
-      start_with_reactor do
-        self.start_console
+    def start_self
+      super do
         self.start_foremen
       end
-    end
-
-    def start_with_reactor(&block)
-      if EM.reactor_running?
-        block.call
-      else
-        EM.run {
-          block.call
-        }
-      end
-    end
-
-    def start_console
-      EM::start_server(self.server, self.port, Console.get(:manager))
     end
 
     def start_foremen
@@ -67,12 +46,12 @@ module HelloGoodbye
         puts e.backtrace
       end
 
-      # TODO: We will want run to be executed here, but ONLY if
-      # we're not already in an event loop.
-      EM::run do
-        self.foremen.each do |foreman|
-          EM::start_server(self.server, foreman[:port], forman[:class])
-        end
+      # Umm..this hash kind of blows.
+      self.foremen.each do |foreman|
+        foreman[:referece] = Foreman.new(:server => self.server, 
+                                         :port => foreman[:port])
+        foreman[:referece].start!
+        foreman[:running] = true
       end
     end
   end

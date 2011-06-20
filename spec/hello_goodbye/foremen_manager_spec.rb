@@ -3,7 +3,10 @@ describe HelloGoodbye::ForemenManager do
     it "should span a responsive console" do
       start_foremen_manager_and do |manager|
         EM.run do 
-          expect { TCPSocket.open(default_server,default_port) }.to_not raise_error
+          expect { 
+            c = TCPSocket.open(default_server,default_port) 
+            c.close
+          }.to_not raise_error
         end
       end
     end

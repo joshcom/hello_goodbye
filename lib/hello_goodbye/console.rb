@@ -6,6 +6,7 @@ module HelloGoodbye
   #                Responds with 'goodbye'.
   class Console < EventMachine::Connection
 
+    require File.expand_path('lib/hello_goodbye/consoles/foreman_console')
     require File.expand_path('lib/hello_goodbye/consoles/manager_console')
 
     # :foreman
@@ -29,10 +30,10 @@ module HelloGoodbye
     def receive_data(data)
       case data
       when /^hello\s*$/
-        send_data "hello\n"
+        send_data "hello\n\n"
         return true
       when /^goodbye\s*$/
-        send_data "goodbye\n"
+        send_data "goodbye\n\n"
         close_connection
         return true
       end
