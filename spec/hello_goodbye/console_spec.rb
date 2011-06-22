@@ -16,8 +16,10 @@ describe HelloGoodbye::Console do
   end
 
   describe ".get" do
-    it "should return nil when console not recognized" do
-      HelloGoodbye::Console.get(:nothing).should be(nil)
+    it "should raise error when console not recognized" do
+      expect{
+        HelloGoodbye::Console.get(:nothing)
+      }.to raise_error
     end
     it "should return a manager console" do
       HelloGoodbye::Console.get(:manager).should be(HelloGoodbye::ManagerConsole)

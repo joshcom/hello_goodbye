@@ -5,6 +5,8 @@ module HelloGoodbye
 
     DEFAULT_MANAGER_PORT = 8080
 
+    set_console_type :manager
+
     def initialize(options={})
       options.map do |key,value|
         self.send("#{key}=",value) if self.respond_to?("#{key}=".to_sym)
@@ -27,30 +29,29 @@ module HelloGoodbye
     #               that will handle the connection and spawn
     #               workers.
     def register_foreman(foreman_hash)
-      self.foremen << foreman.merge(:running => false, :reference => nil)
+      self.foremen << foreman_hash.merge(:running => false, :reference => nil)
     end
 
     # Starts the manager console and all the
     # registered foremen.
-    def start_self
+    def start!
       super do
         self.start_foremen
       end
     end
+    
+    def error_handler(&block)
+      EM::error_handler do |e|
+        block.call
+      end
+    end
 
     def start_foremen
-      # TODO: Allow custom error handler to be attached to class.
-      # Delete this block.
-      EM::error_handler do |e|
-        puts "Whoops, you had an error: #{e.message}"
-        puts e.backtrace
-      end
-
       # Umm..this hash kind of blows.
       self.foremen.each do |foreman|
-        foreman[:referece] = Foreman.new(:server => self.server, 
-                                         :port => foreman[:port])
-        foreman[:referece].start!
+        foreman[:reference] = foreman[:class].new(:server => self.server, 
+                                                  :port => foreman[:port])
+        foreman[:reference].start!
         foreman[:running] = true
       end
     end

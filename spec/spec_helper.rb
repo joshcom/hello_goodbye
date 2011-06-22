@@ -1,4 +1,5 @@
 require File.expand_path('../../lib/hello_goodbye',__FILE__)
+require File.expand_path('../../spec/test_foreman',__FILE__)
 require 'rspec'
 
 # Possibly the most important helper method.

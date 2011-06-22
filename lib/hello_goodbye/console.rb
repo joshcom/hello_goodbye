@@ -22,6 +22,14 @@ module HelloGoodbye
       case type
       when :manager
         ManagerConsole
+      when :foreman
+        ForemanConsole
+      else
+        if (obj = HelloGoodbye.const_get("#{type}_console".split('_').collect(&:capitalize).join))
+            obj
+        else
+          raise ArgumentError, "What type of console is #{type}?"
+        end
       end
     end
 
