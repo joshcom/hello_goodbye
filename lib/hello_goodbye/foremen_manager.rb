@@ -40,7 +40,7 @@ module HelloGoodbye
       end
     end
     
-    def error_handler(&block)
+    def on_error(&block)
       EM::error_handler do |e|
         block.call
       end
