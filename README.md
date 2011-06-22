@@ -122,7 +122,7 @@ Foremen that you build must inherit from HelloGoodbye::Foreman.
 
 Foremen Console
 -------------------
-Once started, your forema will be available for TCP connections, and will respond to the following commands:
+Once started, your foreman will be available for TCP connections, and will respond to the following commands:
 <table>
   <tr>
     <th>Command</th><th>Response Message</th><th>Results</th><th>Action Performed</th>
@@ -175,6 +175,9 @@ Once started, your forema will be available for TCP connections, and will respon
     </td>
     <td>
       ok
+    </td>
+    <td>
+      Nada 
     </td>
     <td>
       Executes the forman's "stop" method, stopping the foreman's daemon.
