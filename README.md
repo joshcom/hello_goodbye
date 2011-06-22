@@ -33,11 +33,13 @@ Consoles
 After making a TCP connection to one of the consoles, communication should occur to and from the console using one of the following standard JSON packages.
 
 Commands issued to a service should be formatted as follows:
+
     {
       "command": "YOUR COMMAND"
     }
 
 Responses from the service will be formatted as follows:
+
     {
       "success": true,
       "message": "MESSAGE FROM SERVICE",
@@ -45,6 +47,7 @@ Responses from the service will be formatted as follows:
     }
 
 Note the following: 
+
 * **success** can be **true** for **false**
 * **results** will either be an array of data relavent to the command, or will be absent.
 
