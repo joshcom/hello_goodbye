@@ -4,6 +4,22 @@ module HelloGoodbye
 
     DEFAULT_SERVER = "127.0.0.1"
 
+    def self.start
+      raise ArgumentError, "Foreman.start must be implemented by child class."
+    end
+
+    def self.stop
+      raise ArgumentError, "Foreman.start must be implemented by child class."
+    end
+
+    def self.status
+      # TODO: general way to report if we are running or stopped.
+    end
+
+    def self.status=(status)
+      # TODO: record start/stopped status
+    end
+
     # Overrides the default ForemanConsole console type
     # to fire up when #start! is called.
     def self.set_console_type(console_sym)

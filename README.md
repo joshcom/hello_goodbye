@@ -118,7 +118,16 @@ Once started, your manager will be available for TCP connections, and will respo
 
 Custom Foremen
 -------------------
-Foremen that you build must inherit from HelloGoodbye::Foreman.
+Foremen that you build must inherit from HelloGoodbye::Foreman.  Beyond that, you should only have to implement a few class methods that will be executed when the corresponding console commands are executed during a TCP connection:
+
+    def self.start
+      # Start listening for events to respond to.
+    end
+
+    def self.stop
+      # Stop listening for events.
+    end
+
 
 Foremen Console
 -------------------
@@ -201,6 +210,43 @@ Once started, your foreman will be available for TCP connections, and will respo
 
 Custom Consoles
 ------------------
+Although there is a generic 
+```ruby 
+HelloGoodbye::ForemanConsole
+``` 
+that will hopefully suit the needs for most usecases, custom consoles can easily be created and attached to custom foremen as needed.
+
+First, to implement your custom console, inherit from 
+```ruby 
+HelloGoodbye::ForemanConsole
+```
+...and override 
+```ruby
+receive_data
+```
+.
+
+To make your own class extensible, and to make use of the built in console commands implemented in the
+```ruby
+HelloGoodbye::ForemanConsole
+```
+class, you'll want to start with the template below when overriding this method:
+
+  def receive_data(data)
+    return true if super   # give built-in commands priority
+    # Process additional commands here
+    # return true if processes successfully
+    false
+  end
+
+The last little catch is this: you must let your custom forman class know which console to use.  To do this, in your Foreman class, assuming your console class is HelloGoodbye::TestConsole (yes, your console **must** be in the HelloGoodbye module ):
+
+    set_console_type :test   # i.e. ":test" for TestConsole
+
+Thus, the rules are as follow:
+
+* Your console's class name must be prefixed with "Console".
+* When setting this type with the class method, you must pass in a symbol matching the de-classified class name, minus the "Console" prefix.
 
 Usage Examples
 -------------------
