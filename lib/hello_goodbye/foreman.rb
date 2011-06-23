@@ -31,6 +31,10 @@ module HelloGoodbye
       @console_type ||= :foreman
     end
 
+    def self.default_server
+      DEFAULT_SERVER
+    end
+
     def initialize(options={})
       self.server = options[:server]
       self.port = options[:port]

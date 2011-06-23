@@ -7,6 +7,10 @@ module HelloGoodbye
 
     set_console_type :manager
 
+    def self.default_manager_port
+      DEFAULT_MANAGER_PORT
+    end
+
     def initialize(options={})
       options.map do |key,value|
         self.send("#{key}=",value) if self.respond_to?("#{key}=".to_sym)

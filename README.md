@@ -220,7 +220,7 @@ First, to implement your custom console, inherit from
 ```ruby 
 HelloGoodbye::ForemanConsole
 ```
-...and override 
+and override 
 ```ruby
 receive_data
 ```

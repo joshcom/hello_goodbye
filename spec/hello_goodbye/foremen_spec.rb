@@ -10,6 +10,7 @@ describe HelloGoodbye::Foreman do
     it "should default to type :foreman" do
       foreman.console_type.should be(:foreman)
     end
+
     it "should be overridable by custom consoles :test_foreman" do
       test_foreman.console_type.should be(:test)
     end
