@@ -9,6 +9,8 @@ A foreman itself, the manager creates a TCP console of its own so foremen can be
 itself.
 
     manager = HelloGoodbye::ForemenManager.new(:port => 8080, :server => "127.0.0.1")
+    # or...
+    manager = HelloGoodbye.manager(8080, "127.0.0.1")
 
 To register foremen (before "start!"ing the manager), execute code like the following:
 
@@ -248,5 +250,3 @@ Thus, the rules are as follow:
 * Your console's class name must be prefixed with "Console".
 * When setting this type with the class method, you must pass in a symbol matching the de-classified class name, minus the "Console" prefix.
 
-Usage Examples
--------------------
