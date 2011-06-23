@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
-gem "eventmachine"
-gem "rspec"
+gem "eventmachine", "0.12.10"
+gem "rspec", "2.6.0"
+gem "json", "1.5.3"
 
 group :development do
   gem "shoulda", ">= 0"

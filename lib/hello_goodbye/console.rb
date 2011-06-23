@@ -1,4 +1,8 @@
 module HelloGoodbye
+
+  require File.expand_path('lib/hello_goodbye/json/request')
+  require File.expand_path('lib/hello_goodbye/json/response')
+
   # Commands shared by all consoles:
   # * 'hello'   => Used to ping the server.  
   #                Responds with 'hello'.
