@@ -224,7 +224,7 @@ HelloGoodbye::ForemanConsole
 ```
 and override 
 ```ruby
-receive_data
+receive_command
 ```
 .
 
@@ -234,7 +234,7 @@ HelloGoodbye::ForemanConsole
 ```
 class, you'll want to start with the template below when overriding this method:
 
-  def receive_data(data)
+  def receive_command(command)
     return true if super   # give built-in commands priority
     # Process additional commands here
     # return true if processes successfully
