@@ -1,8 +1,7 @@
 module HelloGoodbye
   class ManagerConsole < Console
     def receive_data(data)
-      return true if super
-      false
+      super
     end
   end
 end

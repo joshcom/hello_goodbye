@@ -107,7 +107,7 @@ Once started, your manager will be available for TCP connections, and will respo
     (Anything else)
     </td>
     <td>
-      Unknown command
+      unknown command
     </td>
     <td>
       None.
@@ -199,7 +199,7 @@ Once started, your foreman will be available for TCP connections, and will respo
       (Anything else not implemented by your custom foreman)
     </td>
     <td>
-      Unknown command
+      unknown command
     </td>
     <td>
       None.
@@ -235,10 +235,9 @@ HelloGoodbye::ForemanConsole
 class, you'll want to start with the template below when overriding this method:
 
   def receive_command(command)
-    return true if super   # give built-in commands priority
-    # Process additional commands here
-    # return true if processes successfully
-    false
+    # Process additional commands here.
+    # Return if processes successfully
+    super   # Process the default commands.  If no match, a failure response will be returned. 
   end
 
 The last little catch is this: you must let your custom forman class know which console to use.  To do this, in your Foreman class, assuming your console class is HelloGoodbye::TestConsole (yes, your console **must** be in the HelloGoodbye module ):

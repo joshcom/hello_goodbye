@@ -36,21 +36,34 @@ module HelloGoodbye
       end
     end
 
+    # Returns:
+    #   true if data was handled, false if not.
     def receive_command(command)
       case command 
       when "hello"
-        send_data "hello\n"
+        send_response :success => true,
+          :message => "hello"
         return true
       when "goodbye"
-        send_data "goodbye\n"
-        close_connection
+        send_response :success => true,
+          :message => "goodbye"
         return true
+      else
+        send_response :success => false,
+          :message => "unknown command"
       end
       false
     end
 
-    # Returns:
-    #   true if data was handled
+    # Parameters:
+    #   hash
+    #   * success => true or false
+    #   * message => "Your message"
+    #   * results => []
+    def send_response(hash)
+      send_data Response.new(hash).to_json
+    end
+
     def receive_data(data)
       receive_command(Request.new(data))
     end
