@@ -1,8 +1,5 @@
 module HelloGoodbye
 
-  require File.expand_path('lib/hello_goodbye/json/request')
-  require File.expand_path('lib/hello_goodbye/json/response')
-
   # Commands shared by all consoles:
   # * 'hello'   => Used to ping the server.  
   #                Responds with 'hello'.
@@ -12,6 +9,8 @@ module HelloGoodbye
 
     require File.expand_path('lib/hello_goodbye/consoles/foreman_console')
     require File.expand_path('lib/hello_goodbye/consoles/manager_console')
+    require File.expand_path('lib/hello_goodbye/json/request')
+    require File.expand_path('lib/hello_goodbye/json/response')
 
     # :foreman
     #   A reference to the Foreman object that instantiated the console, so that
@@ -37,19 +36,23 @@ module HelloGoodbye
       end
     end
 
-    # Returns:
-    #   true if data was handled
-    def receive_data(data)
-      case data
-      when /^hello\s*$/
-        send_data "hello\n\n"
+    def receive_command(command)
+      case command 
+      when "hello"
+        send_data "hello\n"
         return true
-      when /^goodbye\s*$/
-        send_data "goodbye\n\n"
+      when "goodbye"
+        send_data "goodbye\n"
         close_connection
         return true
       end
       false
+    end
+
+    # Returns:
+    #   true if data was handled
+    def receive_data(data)
+      receive_command(Request.new(data))
     end
   end
 end

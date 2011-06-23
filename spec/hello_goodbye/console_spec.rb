@@ -28,11 +28,11 @@ describe HelloGoodbye::Console do
 
   context "#receive_data" do
     it "should return false on unknown actions" do
-      console.receive_data("custom_action").should be(false)
+      console.receive_command("custom_action").should be(false)
     end
     
     it "should return true on known actions" do
-      console.receive_data("hello").should be(true)
+      console.receive_command("hello").should be(true)
     end
   end
 end
