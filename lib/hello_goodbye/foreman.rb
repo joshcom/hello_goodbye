@@ -1,6 +1,6 @@
 module HelloGoodbye
   class Foreman
-    attr_accessor :server, :port
+    attr_accessor :server, :port, :console
 
     DEFAULT_SERVER = "127.0.0.1"
 
@@ -56,7 +56,10 @@ module HelloGoodbye
 
     # TODO: Detect console type to get.
     def start_console
-      EM::start_server(self.server, self.port, Console.get(Foreman.console_type))
+      me = self
+      EM::start_server(self.server, self.port, Console.get(Foreman.console_type)) do |c|
+        c.foreman = me 
+      end
     end
 
     def start_with_reactor(&block)

@@ -1,6 +1,6 @@
 module HelloGoodbye
   class ManagerConsole < Console
-    def receive_data(data)
+    def receive_command(data)
       super
     end
   end

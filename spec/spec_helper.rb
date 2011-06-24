@@ -1,5 +1,6 @@
 require File.expand_path('../../lib/hello_goodbye',__FILE__)
 require File.expand_path('../../spec/test_foreman',__FILE__)
+require File.expand_path('../../spec/test_console',__FILE__)
 require File.expand_path('../../lib/hello_goodbye/json/request',__FILE__)
 require File.expand_path('../../lib/hello_goodbye/json/response',__FILE__)
 

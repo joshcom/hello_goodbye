@@ -36,6 +36,11 @@ module HelloGoodbye
       end
     end
 
+    def foreman=(f)
+      f.console = self
+      @foreman = f
+    end
+
     # Returns:
     #   true if data was handled, false if not.
     def receive_command(command)
@@ -66,7 +71,18 @@ module HelloGoodbye
     end
 
     def receive_data(data)
-      receive_command(Request.new(data))
+      data = data.strip
+      return false if data == ""
+
+      begin
+        json = Request.new(data)
+      rescue JSON::ParserError => e
+        send_response :success => false,
+          :message => "invalid json"
+        return false
+      end
+
+      receive_command(json.command)
     end
   end
 end

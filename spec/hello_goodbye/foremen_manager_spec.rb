@@ -67,6 +67,5 @@ describe HelloGoodbye::ForemenManager do
         end
       end
     end
-
   end
 end
