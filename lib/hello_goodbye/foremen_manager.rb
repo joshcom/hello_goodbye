@@ -12,6 +12,7 @@ module HelloGoodbye
     end
 
     def initialize(options={})
+      @next_foreman_id = -1
       options.map do |key,value|
         self.send("#{key}=",value) if self.respond_to?("#{key}=".to_sym)
       end
@@ -25,6 +26,10 @@ module HelloGoodbye
       @foremen ||= []
     end
 
+    def next_foreman_id
+      @next_foreman_id += 1
+    end
+
     # Registers a new forman
     # Parameters:
     # * foreman_hash
@@ -33,7 +38,7 @@ module HelloGoodbye
     #               that will handle the connection and spawn
     #               workers.
     def register_foreman(foreman_hash)
-      self.foremen << foreman_hash.merge(:running => false, :reference => nil)
+      self.foremen << foreman_hash.merge(:reference => nil, :id => next_foreman_id)
     end
 
     # Starts the manager console and all the
@@ -54,8 +59,19 @@ module HelloGoodbye
       self.foremen.each do |foreman|
         foreman[:reference] = foreman[:class].new(:server => self.server, 
                                                   :port => foreman[:port])
-        foreman[:reference].start!
-        foreman[:running] = true
+        foreman[:id] = foreman[:reference].start!
+      end
+    end
+
+    def report
+      [].tap do |r|
+        self.foremen.each do |foreman|
+          r << {
+            :id =>  foreman[:id],
+            :name => foreman[:reference].my_name,
+            :status => foreman[:reference].status 
+          }
+        end
       end
     end
   end

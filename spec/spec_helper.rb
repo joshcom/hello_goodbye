@@ -14,6 +14,7 @@ require 'rspec'
 # 3. Yields to a given block, passing the ForemenManager to that block.
 # 4. Stops the event loop.
 def start_foremen_manager_and(f=spec_manager)
+  f.instance_variable_set("@foreman_started",false)
   EM.run_block do
     f.start!
     yield(f)

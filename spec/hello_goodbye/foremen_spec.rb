@@ -28,6 +28,18 @@ describe HelloGoodbye::Foreman do
     end
   end
 
+  describe "starting the foreman" do
+    it "should only be startable once" do
+      f = foreman.new
+      EM.run_block do 
+        f.start!
+        expect {
+          f.start!
+        }.to raise_error
+      end
+    end
+  end
+
   context "under the control of a manager" do
     it "should be stopped initially" do
       start_foremen_manager_and(manager) do |manager|

@@ -20,15 +20,16 @@ describe HelloGoodbye::ForemenManager do
         :port => 8081,
         :class => HelloGoodbye::TestForeman
       })
-      manager.foremen.size.should be(1)
+      manager.register_foreman({
+        :port => 8082,
+        :class => HelloGoodbye::TestForeman
+      })
+      manager.foremen.size.should be(2)
     end
 
-    it "should not have any running foreman" do
-      manager.foremen.each do |f|
-        f[:running].should be_false
-      end
+    it "should give each forman unique ids" do
+      manager.foremen.first[:id].should_not eq(manager.foremen[1][:id])
     end
-
     it "should not have references to objects" do
       manager.foremen.each do |f|
         f[:reference].should be_nil
@@ -51,7 +52,6 @@ describe HelloGoodbye::ForemenManager do
     it "should start foremen" do
       start_foremen_manager_and(manager) do |manager|
         manager.foremen.each do |f|
-          f[:running].should be_true
           f[:reference].should be_a(HelloGoodbye::TestForeman)
         end
       end
@@ -66,6 +66,19 @@ describe HelloGoodbye::ForemenManager do
           }.to_not raise_error
         end
       end
+    end
+
+    it "should report active foreman" do
+      start_foremen_manager_and(manager) do |manager|
+        EM.run_block do 
+          manager.report.first.should eq({:id => manager.foremen.first[:id], 
+                                          :name => "test", :status => :stopped})
+          manager.foremen.first[:reference].employ
+          manager.report.first.should eq({:id => manager.foremen.first[:id],
+                                         :name => "test", :status => :started})
+        end
+      end
+
     end
   end
 end
