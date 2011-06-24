@@ -59,7 +59,7 @@ module HelloGoodbye
       self.foremen.each do |foreman|
         foreman[:reference] = foreman[:class].new(:server => self.server, 
                                                   :port => foreman[:port])
-        foreman[:id] = foreman[:reference].start!
+        foreman[:reference].start!
       end
     end
 
