@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "hello_goodbye"
   gem.homepage = "http://github.com/joshcom/hello_goodbye"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A daemon manager using Eventmachine.}
+  gem.description = %Q{A "foreman" manager using eventmachine, intended to be used to manage a series of workers who, along with the manager, provide an interactive TCP interface.}
   gem.email = "joshua.murray@gmail.com"
   gem.authors = ["joshcom"]
   # dependencies defined in Gemfile
