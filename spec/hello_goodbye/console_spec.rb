@@ -1,7 +1,7 @@
 describe HelloGoodbye::Console do
 
   let(:console) do
-    h = HelloGoodbye::Console.new(1)
+    h = HelloGoodbye::Console.new 1
 
     # Override EM method for this object
     def h.send_data(data)
@@ -26,13 +26,23 @@ describe HelloGoodbye::Console do
     end
   end
 
-  context "#receive_data" do
+  describe "#receive_command" do
     it "should return false on unknown actions" do
       console.receive_command("custom_action").should be(false)
     end
     
     it "should return true on known actions" do
       console.receive_command("hello").should be(true)
+    end
+  end
+
+  context "basic commands" do
+    it "should reply to hello" do
+      command_to_console(console,"hello")["message"].should eq("hello")
+    end
+    it "should reply to goodbye and close connection" do
+      command_to_console(console,"goodbye")["message"].should eq("goodbye")
+      console.connection_closed?().should be_true
     end
   end
 end

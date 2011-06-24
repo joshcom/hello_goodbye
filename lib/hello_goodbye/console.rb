@@ -47,6 +47,7 @@ module HelloGoodbye
       when "goodbye"
         send_response :success => true,
           :message => "goodbye"
+        close_connection
         return true
       else
         send_response :success => false,

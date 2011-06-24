@@ -19,6 +19,31 @@ def start_foremen_manager_and(f=spec_manager)
   end
 end
 
+def command_to_console(console,command)
+  sent_data = nil
+  override_method(console,'send_data') do |data|
+    sent_data = data
+  end
+  override_method(console,'close_connection') do
+    @test_connection_closed = true
+  end
+  override_method(console,'connection_closed?') do
+    @test_connection_closed || false
+  end
+  console.receive_command(command)
+  build_response_hash(sent_data)
+end
+
+def override_method(console,method,&block)
+  (class << console; self; end).send(:define_method, method) do |*args|
+      block.call(*args)
+  end
+end
+
+def build_response_hash(data)
+  JSON.parse(data)
+end
+
 def default_server
   "127.0.0.1"
 end
