@@ -7,10 +7,10 @@ module HelloGoodbye
   #                Responds with 'goodbye'.
   class Console < EventMachine::Connection
 
-    require File.expand_path('lib/hello_goodbye/consoles/foreman_console')
-    require File.expand_path('lib/hello_goodbye/consoles/manager_console')
-    require File.expand_path('lib/hello_goodbye/json/request')
-    require File.expand_path('lib/hello_goodbye/json/response')
+    require File.expand_path('../../hello_goodbye/consoles/foreman_console',__FILE__)
+    require File.expand_path('../../hello_goodbye/consoles/manager_console',__FILE__)
+    require File.expand_path('../../hello_goodbye/json/request',__FILE__)
+    require File.expand_path('../../hello_goodbye/json/response',__FILE__)
 
     # :foreman
     #   A reference to the Foreman object that instantiated the console, so that
