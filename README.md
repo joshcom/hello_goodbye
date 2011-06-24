@@ -120,13 +120,13 @@ Once started, your manager will be available for TCP connections, and will respo
 
 Custom Foremen
 -------------------
-Foremen that you build must inherit from HelloGoodbye::Foreman.  Beyond that, you should only have to implement a few class methods that will be executed when the corresponding console commands are executed during a TCP connection:
+Foremen that you build must inherit from HelloGoodbye::Foreman.  Beyond that, you should only have to implement a few instance methods that will be executed when the corresponding console commands are executed during a TCP connection:
 
-    def self.start
+    def start
       # Start listening for events to respond to.
     end
 
-    def self.stop
+    def stop
       # Stop listening for events.
     end
 

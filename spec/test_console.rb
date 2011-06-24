@@ -1,7 +1,7 @@
 require File.expand_path('lib/hello_goodbye')
 
 module HelloGoodbye
-  class TestConsole < Console
+  class TestConsole < ForemanConsole
     def receive_command(command)
       case command
       when "custom"
@@ -12,6 +12,10 @@ module HelloGoodbye
         send_response :success => true,
           :message => "oops"
         raise RuntimeError, "Oh noooooes!"
+      when "kill"
+        send_response :success => true,
+          :message => "Why me?"
+        EM.stop
       end
       super
     end

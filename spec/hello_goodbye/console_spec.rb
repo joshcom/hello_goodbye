@@ -63,4 +63,5 @@ describe HelloGoodbye::Console do
       command_to_console(test_console,"custom")["message"].should eq("test command")
     end
   end
+
 end

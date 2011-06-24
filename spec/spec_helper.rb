@@ -20,6 +20,12 @@ def start_foremen_manager_and(f=spec_manager)
   end
 end
 
+def command_to_json_str(command)
+  {
+    :command => command
+  }.to_json
+end
+
 def command_to_console(console,command)
   sent_data = nil
   override_method(console,'send_data') do |data|

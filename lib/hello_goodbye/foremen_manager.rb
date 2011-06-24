@@ -51,7 +51,6 @@ module HelloGoodbye
     end
 
     def start_foremen
-      # Umm..this hash kind of blows.
       self.foremen.each do |foreman|
         foreman[:reference] = foreman[:class].new(:server => self.server, 
                                                   :port => foreman[:port])
