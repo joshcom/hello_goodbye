@@ -104,6 +104,44 @@ Once started, your manager will be available for TCP connections, and will respo
   </tr>
   <tr>
     <td>
+      start XX 
+    </td>
+    <td>
+      "ok" if successful.
+    </td>
+    <td>
+      An array of started foreman.  E.g. ["test"]
+    </td>
+    <td>
+      The foreman with the name XX is started.  If XX is "all", all stopped foremen
+      will be started. 
+
+      XX will be "test" if the foreman name is TestForman.
+      Otherwise, if XX is an integer, the ID of the active foreman will be consulted
+      instead of the name.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      stop XX 
+    </td>
+    <td>
+      "ok" if successful.
+    </td>
+    <td>
+      An array of stopped foreman.  E.g. ["test"]
+    </td>
+    <td>
+      The foreman with the name XX is stopped.  If XX is "all", all active foremen
+      will be stopped. 
+
+      XX will be "test" if the foreman name is TestForman.
+      Otherwise, if XX is an integer, the ID of the active foreman will be consulted
+      instead of the name.
+    </td>
+  </tr>
+  <tr>
+    <td>
     (Anything else)
     </td>
     <td>
