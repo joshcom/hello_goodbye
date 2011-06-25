@@ -265,23 +265,23 @@ Once started, your foreman will be available for TCP connections, and will respo
 Custom Consoles
 ------------------
 Although there is a generic 
-```ruby 
+```
 HelloGoodbye::ForemanConsole
 ``` 
 that will hopefully suit the needs for most usecases, custom consoles can easily be created and attached to custom foremen as needed.
 
 First, to implement your custom console, inherit from 
-```ruby 
+```
 HelloGoodbye::ForemanConsole
 ```
 and override 
-```ruby
+```
 receive_command
 ```
 .
 
 To make your own class extensible, and to make use of the built in console commands implemented in the
-```ruby
+```
 HelloGoodbye::ForemanConsole
 ```
 class, you'll want to start with the template below when overriding this method:
