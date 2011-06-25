@@ -96,7 +96,7 @@ Once started, your manager will be available for TCP connections, and will respo
       ok
     </td>
     <td>
-      (A list of all foreman)
+      An array of hashes with details about each forman. 
     </td>
     <td>
       Nothing.
