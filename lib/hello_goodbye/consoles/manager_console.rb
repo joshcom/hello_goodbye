@@ -2,15 +2,27 @@ module HelloGoodbye
   class ManagerConsole < Console
     def receive_command(command)
       case command
-      when /^start/
-        # TODO: Grab the ID, and start the foreman.
-        send_response :success => true,
-          :message => "start will be implemented soon"
+      when /^start /
+        id = command.gsub(/^start /, "")
+        if (started_foremen = self.foreman.trigger_foreman(:start, id))
+          send_response :success => true,
+            :message => "ok", 
+            :results => started_foremen
+        else
+          send_response :success => false,
+            :message => "no match for foreman '#{id}'"
+        end
         return true
       when /^stop /
-        # TODO: Grab the ID, and stop the foreman.
-        send_response :success => true,
-          :message => "stop will be implemented soon"
+        id = command.gsub(/^stop /, "")
+        if (stopped_foremen = self.foreman.trigger_foreman(:stop,id))
+          send_response :success => true,
+            :message => "ok", 
+            :results => stopped_foremen
+        else
+          send_response :success => false,
+            :message => "no match for foreman '#{id}'"
+        end
         return true
       when "foremen"
         send_response :success => true, :message => "ok", 

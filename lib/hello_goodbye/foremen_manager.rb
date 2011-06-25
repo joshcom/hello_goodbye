@@ -55,11 +55,36 @@ module HelloGoodbye
       end
     end
 
+    # Start the consoles for all foremen.  This does not start
+    # employing workers.
     def start_foremen
       self.foremen.each do |foreman|
         foreman[:reference] = foreman[:class].new(:server => self.server, 
                                                   :port => foreman[:port])
         foreman[:reference].start!
+      end
+    end
+
+    # Trigger all formen to either start or stop employing workers.
+    # Parameters:
+    # * mode => :start or :stop
+    # * id =>  The foreman's integer ID or name
+    def trigger_foreman(mode,id)
+      [].tap do |toggled_foremen|
+        self.foremen.each do |foreman|
+          if foreman[:reference].nil? || (id != "all" && foreman[:reference].my_name != id && foreman[:id] != id.to_i)
+            next
+          end
+          next if mode == :start && foreman[:reference].running?
+          next if mode == :stop && !foreman[:reference].running?
+
+          if mode == :start
+            foreman[:reference].employ
+          else
+            foreman[:reference].unemploy
+          end
+          toggled_foremen << foreman[:id]
+        end
       end
     end
 
