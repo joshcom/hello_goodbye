@@ -234,6 +234,20 @@ Once started, your foreman will be available for TCP connections, and will respo
   </tr>
   <tr>
     <td>
+      status 
+    </td>
+    <td>
+      "running" or "stopped" 
+    </td>
+    <td>
+      Nada 
+    </td>
+    <td>
+      Nothing.
+    </td>
+  </tr>
+  <tr>
+    <td>
       (Anything else not implemented by your custom foreman)
     </td>
     <td>

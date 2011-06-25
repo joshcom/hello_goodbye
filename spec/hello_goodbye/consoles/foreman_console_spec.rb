@@ -26,5 +26,10 @@ describe HelloGoodbye::Console do
       r["message"].should eq("ok")
       foreman.status.should be(:stopped)
     end
+
+    it "should stop report the status of the forman" do
+      r = command_to_console(foreman_console,"status")
+      r["message"].should eq("stopped")
+    end
   end
 end

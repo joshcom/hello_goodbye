@@ -71,6 +71,11 @@ module HelloGoodbye
       @status || :stopped
     end
 
+    # true if the foreman is currently employing workers
+    def running?
+      self.status == :started
+    end
+
     # Sets the foreman status to either :started or :stopped
     def status=(status)
       @status = status.to_sym
