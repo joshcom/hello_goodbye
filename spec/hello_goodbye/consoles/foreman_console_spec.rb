@@ -18,7 +18,7 @@ describe HelloGoodbye::Console do
     it "should start the foreman class from the console" do
       r = command_to_console(foreman_console,"start")
       r["message"].should eq("ok")
-      foreman.status.should be(:started)
+      foreman.status.should be(:running)
     end
 
     it "should stop the foreman class from the console" do

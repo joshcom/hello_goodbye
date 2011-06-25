@@ -66,25 +66,25 @@ module HelloGoodbye
     # Reports the current status of the foreman.
     # Returns:
     #  * :stopped if the foreman is not currently employing workers.
-    #  * :started if the foreman is active
+    #  * :running if the foreman is active
     def status
       @status || :stopped
     end
 
     # true if the foreman is currently employing workers
     def running?
-      self.status == :started
+      self.status == :running
     end
 
-    # Sets the foreman status to either :started or :stopped
+    # Sets the foreman status to either :running or :stopped
     def status=(status)
       @status = status.to_sym
     end
 
-    # Sets the foreman status to :started and calls self.start
+    # Sets the foreman status to :running and calls self.start
     def employ
       self.start
-      self.status = :started
+      self.status = :running
     end
 
     # Sets the foreman status to :stopped and calls self.stop

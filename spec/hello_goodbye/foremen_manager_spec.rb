@@ -72,10 +72,10 @@ describe HelloGoodbye::ForemenManager do
       start_foremen_manager_and(manager) do |manager|
         EM.run_block do 
           manager.report.first.should eq({:id => manager.foremen.first[:id], 
-                                          :name => "test", :status => :stopped})
+                                          :name => "test", :status => "stopped"})
           manager.foremen.first[:reference].employ
           manager.report.first.should eq({:id => manager.foremen.first[:id],
-                                         :name => "test", :status => :started})
+                                         :name => "test", :status => "running"})
         end
       end
 

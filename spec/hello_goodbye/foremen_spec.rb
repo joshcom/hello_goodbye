@@ -50,7 +50,7 @@ describe HelloGoodbye::Foreman do
       start_foremen_manager_and(manager) do |manager|
         f = manager.foremen.first[:reference]
         f.employ
-        f.status.should be(:started)
+        f.status.should be(:running)
       end
     end
     it "should be unemployable" do

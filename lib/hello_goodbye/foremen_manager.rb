@@ -69,7 +69,7 @@ module HelloGoodbye
           r << {
             :id =>  foreman[:id],
             :name => foreman[:reference].my_name,
-            :status => foreman[:reference].status 
+            :status => foreman[:reference].status.to_s
           }
         end
       end

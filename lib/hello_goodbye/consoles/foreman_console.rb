@@ -14,7 +14,7 @@ module HelloGoodbye
         return true
       when "status"
         send_response :success => true,
-          :message => (self.foreman.running?() ? "running" : "stopped")
+          :message => self.foreman.status.to_s
         return true
       end
       super
