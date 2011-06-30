@@ -37,6 +37,8 @@ module HelloGoodbye
     #     :class => A reference to the foreman class
     #               that will handle the connection and spawn
     #               workers.
+    #     :options => An optional hash to pass to the initializer of the class
+    #                 when an instance is created.
     def register_foreman(foreman_hash)
       self.foremen << foreman_hash.merge(:reference => nil, :id => next_foreman_id)
     end
@@ -59,8 +61,9 @@ module HelloGoodbye
     # employing workers.
     def start_foremen
       self.foremen.each do |foreman|
-        foreman[:reference] = foreman[:class].new(:server => self.server, 
-                                                  :port => foreman[:port])
+        o = (foreman[:options].is_a?(Hash) ? foreman[:options] : {})
+        foreman[:reference] = foreman[:class].new({:server => self.server, 
+                                                   :port => foreman[:port]}.merge(o))
         foreman[:reference].start!
       end
     end

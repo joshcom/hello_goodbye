@@ -22,7 +22,8 @@ describe HelloGoodbye::ForemenManager do
       })
       manager.register_foreman({
         :port => 8082,
-        :class => HelloGoodbye::TestForeman
+        :class => HelloGoodbye::TestForeman,
+        :options => {:test_option => "set!"}
       })
       manager.foremen.size.should be(2)
     end
@@ -54,6 +55,13 @@ describe HelloGoodbye::ForemenManager do
         manager.foremen.each do |f|
           f[:reference].should be_a(HelloGoodbye::TestForeman)
         end
+      end
+    end
+
+    it "should pass options to registered foremen" do
+      start_foremen_manager_and(manager) do |manager|
+        manager.foremen.first[:reference].test_option.should be_nil
+        manager.foremen[1][:reference].test_option.should eq('set!')
       end
     end
 
