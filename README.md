@@ -14,7 +14,7 @@ itself.
 
 To register foremen (before "start!"ing the manager), execute code like the following:
 
-    manager.register_foreman( :port => 8081, :class => HelloGoodbye::TestForeman )
+    manager.register_foreman( :port => 8081, :class => HelloGoodbye::TestForeman, :options => {:options => 'to pass to instance'} )
 
 If you want to capture errors (and you should -- if the manager goes down, everything is liable to go down with it),
 pass a block to the on_error method as follows:
