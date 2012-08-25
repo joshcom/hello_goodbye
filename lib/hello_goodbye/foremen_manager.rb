@@ -1,6 +1,6 @@
 module HelloGoodbye
-  require File.expand_path('../../hello_goodbye/console',__FILE__)
-  require File.expand_path('../../hello_goodbye/foreman',__FILE__)
+  require 'hello_goodbye/console'
+  require 'hello_goodbye/foreman'
   class ForemenManager < Foreman
 
     DEFAULT_MANAGER_PORT = 8080

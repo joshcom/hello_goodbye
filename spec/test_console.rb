@@ -1,5 +1,3 @@
-require File.expand_path('../../lib/hello_goodbye',__FILE__)
-
 module HelloGoodbye
   class TestConsole < ForemanConsole
     def receive_command(command)

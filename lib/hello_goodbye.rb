@@ -2,7 +2,7 @@ require 'rubygems'
 require 'eventmachine'
 require 'json'
 
-require File.expand_path('../hello_goodbye/foremen_manager',__FILE__)
+require 'hello_goodbye/foremen_manager'
 
 module HelloGoodbye
 

@@ -1,8 +1,8 @@
-require File.expand_path('../../lib/hello_goodbye',__FILE__)
-require File.expand_path('../../spec/test_foreman',__FILE__)
-require File.expand_path('../../spec/test_console',__FILE__)
-require File.expand_path('../../lib/hello_goodbye/json/request',__FILE__)
-require File.expand_path('../../lib/hello_goodbye/json/response',__FILE__)
+require 'hello_goodbye'
+require 'spec/test_foreman'
+require 'spec/test_console'
+require 'hello_goodbye/json/request'
+require 'hello_goodbye/json/response'
 
 require 'rspec'
 
