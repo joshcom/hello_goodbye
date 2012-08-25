@@ -49,17 +49,17 @@ module HelloGoodbye
       when "hello"
         send_response :success => true,
           :message => "hello"
-        return true
+        true
       when "goodbye"
         send_response :success => true,
           :message => "goodbye"
         close_connection
-        return true
+        true
       else
         send_response :success => false,
           :message => "unknown command"
+        false
       end
-      false
     end
 
     # Parameters:

@@ -28,6 +28,7 @@ module HelloGoodbye
     def initialize(options={})
       self.server = options[:server]
       self.port = options[:port]
+
       @foreman_started = false
     end
 
@@ -46,10 +47,12 @@ module HelloGoodbye
     # that may need to be done.
     def start!
       raise RuntimeError, "Foreman already started!" if @foreman_started == true
+
       start_with_reactor do
         self.start_console
         yield if block_given?
       end
+
       @foreman_started = true
     end
 
