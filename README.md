@@ -2,10 +2,13 @@ HelloGoodbye
 ===============
 A daemon manager with a TCP interface built on top of EventMachine.
 
-Installation
+Install the Gem
 ------------------
-    gem build hello_goodbye.gemspec
-    gem install hello_goodbye-0.1.0.gem
+
+You can install the gem from RubyGems
+
+    gem install hello_goodbye
+
 
 The Foremen Manager
 -------------------

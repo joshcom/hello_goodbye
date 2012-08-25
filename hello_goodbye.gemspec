@@ -15,10 +15,10 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = HelloGoodbye::VERSION
 
-  gem.add_dependency "eventmachine", "0.12.10"
-  gem.add_dependency "json", "1.5.3"
+  gem.add_dependency "eventmachine", "~> 0.12.10"
+  gem.add_dependency "json", "~> 1.5.3"
   gem.add_development_dependency "bundler"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "shoulda", ">= 0"
-  gem.add_development_dependency "rspec", "2.6.0"
+  gem.add_development_dependency "rspec", "~> 2.6.0"
 end
