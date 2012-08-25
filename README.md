@@ -2,6 +2,11 @@ HelloGoodbye
 ===============
 A daemon manager with a TCP interface built on top of EventMachine.
 
+Installation
+------------------
+    gem build hello_goodbye.gemspec
+    gem install hello_goodbye-0.1.0.gem
+
 The Foremen Manager
 -------------------
 The foremen manager is the mother-ship for all your custom foremen that will spawn workers (or do whatever you wish).  

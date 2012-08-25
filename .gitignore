@@ -17,5 +17,8 @@ pkg
 # For vim:
 *.swp
 
+# built gems
+*.gem
+
 vendor/bundle
 Gemfile.lock
